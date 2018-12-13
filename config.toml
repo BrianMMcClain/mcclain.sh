@@ -2,3 +2,29 @@ baseURL = "https://mcclain.sh/"
 languageCode = "en-us"
 title = "mcclain.sh"
 theme = "hermit"
+
+[params]
+
+    [[params.social]]
+        name = "twitter"
+        url = "https://twitter.com/BrianMMcClain"
+
+    [[params.social]]
+        name = "github"
+        url = "https://github.com/brianmmcclain"
+
+    [[params.social]]
+        name = "linkedin"
+        url = "https://www.linkedin.com/in/brian-mcclain/"
+    
+[menu]
+    
+    [[menu.main]]
+        name = "Posts"
+        url = "/posts"
+        weight = 10
+    
+    [[menu.main]]
+        name = "About"
+        url = "/about"
+        weight = 20
