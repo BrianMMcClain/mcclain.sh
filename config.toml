@@ -1,0 +1,4 @@
+baseURL = "https://mcclain.sh/"
+languageCode = "en-us"
+title = "mcclain.sh"
+theme = "hermit"
