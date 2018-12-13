@@ -3,6 +3,11 @@ languageCode = "en-us"
 title = "mcclain.sh"
 theme = "hermit"
 
+googleAnalytics = "UA-131000305-1"
+
+[author]
+    name = "Brian McClain"
+
 [params]
 
     [[params.social]]
