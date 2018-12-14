@@ -34,7 +34,7 @@ googleAnalytics = "UA-131000305-1"
         url = "/posts"
         weight = 10
     
-    [[menu.main]]
-        name = "About"
-        url = "/about"
-        weight = 20
+    # [[menu.main]]
+    #     name = "About"
+    #     url = "/about"
+    #     weight = 20
