@@ -10,6 +10,11 @@ googleAnalytics = "UA-131000305-1"
 
 [params]
 
+    dateform        = "Jan 2, 2006"
+    dateformShort   = "Jan 2"
+    dateformNum     = "2006-01-02"
+    dateformNumTime = "Jan 2, 2006 3:04 PM"
+
     [[params.social]]
         name = "twitter"
         url = "https://twitter.com/BrianMMcClain"
