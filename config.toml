@@ -5,6 +5,8 @@ theme = "hermit"
 
 googleAnalytics = "UA-131000305-1"
 
+pygmentsCodeFences = true
+
 [author]
     name = "Brian McClain"
 
