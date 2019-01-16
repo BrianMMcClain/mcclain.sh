@@ -26,6 +26,10 @@ pygmentsCodeFences = true
         url = "https://github.com/brianmmcclain"
 
     [[params.social]]
+        name = "youtube"
+        url = "http://youtube.com/user/brianmmcclain"
+        
+    [[params.social]]
         name = "linkedin"
         url = "https://www.linkedin.com/in/brian-mcclain/"
     
