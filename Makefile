@@ -1,0 +1,24 @@
+HUGO := hugo
+TIMESTAMP := `date`
+
+.PHONY: all
+all: test build deploy
+
+.PHONY: watch
+watch:
+	$(HUGO) server -D --bind "0.0.0.0"
+
+.PHONY: test
+test:
+	@echo "No tests found"
+
+.PHONY: build
+build:
+	hugo -t hermit
+
+.PHONY: deploy
+deploy:
+	cd public && \
+	git add . && \
+	git commit -m "Site regenerated at $(TIMESTAMP)" && \
+	git push origin master
