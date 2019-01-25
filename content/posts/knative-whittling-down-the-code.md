@@ -7,7 +7,7 @@ tags:
   - container
   - serverless
 image: http://d2dqcpbw60t2h9.cloudfront.net/img/wood-shavings.jpg
-summary: Let's take a look at how we can whittle down configuration and code alike with Knative and Project riff
+summary: Let's take a look at how we can whittle down the amount of both code and configuration we write with Knative and Project riff
 ---
 
 Hands down, the open-source project I've been most in love with to come out of 2018 has been Knative, a serverless platform built on top of Kubernetes. Not just as an open source serverless platform, but for the entire development paradigm that it encourages. Event-driven development isn’t new, but Knative lays the groundwork to build an ecosystem around eventing. If you’re not familiar with Knative, any documentation you read on it will break down what it is into three distinct categories:
