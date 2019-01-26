@@ -2,7 +2,7 @@ HUGO := hugo
 TIMESTAMP := `date`
 
 .PHONY: all
-all: test build deploy
+all: build test deploy
 
 .PHONY: watch
 watch:
@@ -10,7 +10,7 @@ watch:
 
 .PHONY: test
 test:
-	@echo "No tests found"
+	# htmlproofer --http-status-ignore "999" public
 
 .PHONY: build
 build:
