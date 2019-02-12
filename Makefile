@@ -10,7 +10,7 @@ watch:
 
 .PHONY: test
 test:
-	# htmlproofer --http-status-ignore "999" public
+	htmlproofer --http-status-ignore "999" public
 
 .PHONY: build
 build:
