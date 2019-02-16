@@ -9,7 +9,7 @@ watch:
 	$(HUGO) server -D --bind "0.0.0.0"
 
 .PHONY: test
-test:
+test: build
 	htmlproofer --http-status-ignore "999" public
 
 .PHONY: build
