@@ -1,8 +1,7 @@
 HUGO := hugo
-TIMESTAMP := `date`
 
 .PHONY: all
-all: build test deploy
+all: build test
 
 .PHONY: watch
 watch:
@@ -15,10 +14,3 @@ test: build
 .PHONY: build
 build:
 	hugo -t hermit
-
-.PHONY: deploy
-deploy:
-	cd public && \
-	git add . && \
-	git commit -m "Site regenerated at $(TIMESTAMP)" && \
-	git push origin master
