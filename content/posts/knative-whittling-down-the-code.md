@@ -1,7 +1,7 @@
 ---
 title: "Knative: Whittling Down the Code"
 date: 2019-01-14T09:56:06-05:00
-draft: true
+draft: false
 tags: 
   - knative
   - container
