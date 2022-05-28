@@ -1,0 +1,71 @@
+baseURL = 'http://example.org/'
+languageCode = 'en-us'
+languageName = "English"
+title = 'mcclain.sh'
+theme = "LoveIt"
+
+[author]
+  name = "Brian McClain"
+  email = ""
+  link = "https://twitter.com/BrianMMcClain/"
+
+[params.social]
+    [params.social.Twitter]
+        id = "BrianMMcClain"
+        weight = 1
+    [params.social.GitHub]
+        id = "BrianMMcClain"
+        weight = 2
+    [params.social.youtubelegacy]
+        id = "brianmmcclain"
+        weight = 3
+    [params.social.LinkedIn]
+        id = "brian-mcclain"
+        weight = 4
+
+[params]
+    defaultTheme = "dark"
+    title = "mcclain.sh"
+    description = "Welcome to mcclain.sh"
+    [params.header]
+        [params.header.title]
+            name = "mcclain.sh"
+    [params.app]
+        title = "mcclain.sh"
+    [params.home]
+        [params.home.profile]
+            enable = true
+            gravatarEmail = "brianmmcclain@gmail.com"
+            title = "mcclain.sh"
+            subtitle = ""
+    [params.page]
+        [params.page.share]
+            HackerNews = false
+            Line = false
+            Weibo = false
+            Linkedin = true
+    [params.analytics]
+        enable = true
+        [params.analytics.google]
+            id = "UA-131000305-1"
+
+
+[menu]
+  [[menu.main]]
+    weight = 1
+    identifier = "posts"
+    # you can add extra information before the name (HTML format is supported), such as icons
+    pre = ""
+    # you can add extra information after the name (HTML format is supported), such as icons
+    post = ""
+    name = "Posts"
+    url = "/posts/"
+    # title will be shown when you hover on this menu link
+    title = ""
+
+
+[markup]
+  # Syntax Highlighting (https://gohugo.io/content-management/syntax-highlighting)
+  [markup.highlight]
+    # false is a necessary configuration (https://github.com/dillonzq/LoveIt/issues/158)
+    noClasses = false
