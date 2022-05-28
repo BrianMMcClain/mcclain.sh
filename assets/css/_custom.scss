@@ -154,7 +154,7 @@
   }
 
   /* Make sure all circles are at the same spot */
-  .timeline-left::after, .right::after {
+  .timeline-left::after, .timeline-right::after {
     left: 15px;
   }
   
