@@ -1,0 +1,143 @@
+{{- define "content" -}}
+    {{- $params := .Scratch.Get "params" -}}
+    {{- $profile := .Site.Params.home.profile -}}
+    {{- $posts := .Site.Params.home.posts -}}
+
+    <div class="page home"{{ if ne $posts.enable false }} data-home="posts"{{ end }}>
+        {{- /* Profile */ -}}
+        {{- $profile := .Site.Params.home.profile -}}
+        <div class="home-profile">
+            {{- $avatar := $profile.avatarURL -}}
+            {{- with $profile.gravatarEmail -}}
+                {{- $avatar = md5 . | printf "https://www.gravatar.com/avatar/%v?s=240&d=mp" -}}
+            {{- end -}}
+            {{- if $avatar -}}
+                <div class="about-avatar">
+                    {{- $menus := $.Site.Menus.main | default slice -}}
+                    {{- with index $menus 0 -}}
+                        {{- $url := .URL | relLangURL -}}
+                        {{- with .Page -}}
+                            {{- $url = .RelPermalink -}}
+                        {{- end -}}
+                        <a href="{{ $url }}"{{ with .Title | default .Name }} title="{{ . }}"{{ end }}{{ if (urls.Parse $url).Host }} rel="noopener noreffer" target="_blank"{{ end }}>
+                            {{- dict "Src" $avatar | partial "plugin/img.html" -}}
+                        </a>
+                    {{- else -}}
+                        {{- dict "Src" $avatar | partial "plugin/img.html" -}}
+                    {{- end -}}
+                </div>
+            {{- end -}}
+
+            <h1 class="home-title">
+                {{- .Title | safeHTML -}}
+            </h1>
+
+            {{- if $profile.social -}}
+                <div class="links">
+                    {{- $socialMap := resources.Get "data/social.yml" | transform.Unmarshal -}}
+                    {{- $socialArr := slice -}}
+                    {{- range $key, $value := .Site.Params.social -}}
+                        {{- $social := $key | lower | index $socialMap | default dict -}}
+                        {{- if $value -}}
+                            {{- if reflect.IsMap $value -}}
+                                {{- with $value.weight -}}
+                                    {{- $social = dict "Weight" . | merge $social -}}
+                                {{- end -}}
+                                {{- with $value.prefix -}}
+                                    {{- $social = dict "Prefix" . | merge $social -}}
+                                {{- end -}}
+                                {{- with $value.template -}}
+                                    {{- $social = dict "Template" . | merge $social -}}
+                                {{- end -}}
+                                {{- with $value.id -}}
+                                    {{- $social = dict "Id" . | merge $social -}}
+                                {{- end -}}
+                                {{- with $value.url -}}
+                                    {{- $social = dict "Url" . | merge $social -}}
+                                {{- end -}}
+                                {{- with $value.title -}}
+                                    {{- $social = dict "Title" . | merge $social -}}
+                                {{- end -}}
+                                {{- with $value.newtab -}}
+                                    {{- $social = dict "Newtab" . | merge $social -}}
+                                {{- end -}}
+                                {{- with $value.icon -}}
+                                    {{- $social = dict "Icon" . | merge $social -}}
+                                {{- end -}}
+                            {{- else if ne $value true -}}
+                                {{- $social = dict "Id" $value | merge $social -}}
+                            {{- end -}}
+                            {{- if $social.Icon.Simpleicons -}}
+                                {{- $prefix := ($.Scratch.Get "cdn" | default dict).simpleIconsPrefix -}}
+                                {{- $social = dict "Prefix" $prefix | dict "Icon" | merge $social -}}
+                            {{- end -}}
+                            {{- $socialArr = $socialArr | append $social -}}
+                        {{- end -}}
+                    {{- end -}}
+                    {{- range sort $socialArr "Weight" -}}
+                        {{- partial "plugin/social.html" . -}}
+                    {{- end -}}
+                </div>
+            {{- end -}}
+        </div>
+
+
+        {{- /* Content */ -}}
+            <div class="single">
+                <div class="content" id="content">
+                    <br />
+                   <p style="font-size: 2rem; text-align: center;">Hey There! I'm {{ .Params.firstname }}</p>
+                   <br />
+                   {{ .Content  }}
+
+                   <!-- Employment Timeline -->
+                   <div class="timeline">
+                    <div class="timeline-container timeline-left">
+                      <div class="timeline-content">
+                        <h2>January 2020</h2>
+                        <h3>VMware</h3>
+                        <p>Joined VMware by way of acquisition. Developed and created content for the <a href="https://tanzu.vmware.com/developer/" target="_blank">Tanzu Developer Center</a></p>
+                      </div>
+                    </div>
+                    <div class="timeline-container timeline-right">
+                      <div class="timeline-content">
+                        <h2>April 2017</h2>
+                        <h3>Pivotal</h3>
+                        <p>Joined Pivotal as a Principal Product Marketing Manager, creating educational content, demos, and presentations for Pivotal's entire portfolio</p>
+                      </div>
+                    </div>
+                    <div class="timeline-container timeline-left">
+                        <div class="timeline-content">
+                          <h2>March 2015</h2>
+                          <h3>Basho</h3>
+                          <p>Performance engineering on Basho's <a href="https://riak.com/" target="_blank">Riak and Riak TS</a>, as well as researching how their performance compares to competitors</p>
+                        </div>
+                    </div>
+                    <div class="timeline-container timeline-right">
+                        <div class="timeline-content">
+                          <h2>October 2012</h2>
+                          <h3>Warner Music Group</h3>
+                          <p>Lead of Infrastructure Engineering. Architected, deployed, end managed the Cloud Foundry-based infrastructure for WMG's greenfield organization to migrate to a cloud-native architecture</p>
+                        </div>
+                      </div>
+                      <div class="timeline-container timeline-left">
+                        <div class="timeline-content">
+                          <h2>January 2009</h2>
+                          <h3>Diebold</h3>
+                          <p>Researcher for Emerging Technologies, evaluating technologies to determine how they may be used to enhance Diebold's products and services</p>
+                        </div>
+                    </div>
+                    <div class="timeline-container timeline-right">
+                        <div class="timeline-content">
+                          <h2>2007-2011</h2>
+                          <h3>University of Akron</h3>
+                          <p>Bachelor of Science, Computer Science. Member of the ACM, special studies in computer security as well as parallel and distributed processing</p>
+                        </div>
+                    </div>
+                  </div> 
+                    
+
+                </div>
+            </div>
+    </div>
+{{- end -}}
