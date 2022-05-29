@@ -10,24 +10,25 @@ tags:
 - Buildpacks
 ---
 
-The above tweet summarizes a very productive and exciting lunch I had today, in which after getting CF v2 working last night thanks to <a href="https://github.com/nttlabs/nise_bosh" target="_blank">nise_bosh</a>, I started reading about buildpacks.
+The above tweet summarizes a very productive and exciting lunch I had today, in which after getting CF v2 working last night thanks to [nise_bosh](https://github.com/nttlabs/nise_bosh), I started reading about buildpacks.
 
-To summarize buildpacks, taken straight from the <a href="http://docs.cloudfoundry.com/docs/using/deploying-apps/custom/" target="_blank">Cloud Foundry documentation</a>...
+To summarize buildpacks, taken straight from the [Cloud Foundry documentation](http://docs.cloudfoundry.com/docs/using/deploying-apps/custom/)...
 
 
 > Buildpacks are a convenient way of packaging framework and/or runtime support for your application. For example, Cloud Foundry doesn't support Django or Python by default. Using a buildpack for Python and Django would allow you to add support for these at the deployment stage.
 
-These are very much the same as the buildpacks you're familiar with if you've ever used <a href="https://devcenter.heroku.com/articles/buildpacks" target="_blank">Heroku</a>. In Cloud Foundry v1, to add a framework or runtime, you modified the actual CF source code, submitted a pull request, and it would get merged into the main repo. However, buildpacks plug right into Cloud Foundry v2. You don't need to write any code other than the buildpack itself. You don't need anyone's permission and you don't have to wait for a code review.
+These are very much the same as the buildpacks you're familiar with if you've ever used [Heroku]https://devcenter.heroku.com/articles/buildpacks"). In Cloud Foundry v1, to add a framework or runtime, you modified the actual CF source code, submitted a pull request, and it would get merged into the main repo. However, buildpacks plug right into Cloud Foundry v2. You don't need to write any code other than the buildpack itself. You don't need anyone's permission and you don't have to wait for a code review.
 
 So how easy are buildpacks to create and use? Well, I decided to do a little experiment to figure this out for myself. I chose to pick a runtime I'm almost completely unfamiliar with: Haskell.
 
-<center>{% img /images/haskell/lyah.png 300 400 %}</center>
+![Learn You A Haskell For Great Good book cover](/images/haskell/lyah.png)
 
-I say <i>almost</i> because I had a brief stint of learning Haskell using the above publication. I had fun, but didn't have enough time to dedicate to learning it.
 
-So after a quick search, I found there was a Heroku buildpack for Haskell that already existed, which can be found <a href="https://github.com/puffnfresh/heroku-buildpack-haskell" target="_blank">here</a>. Awesome, this is exactly what I was hoping for. I had no context of what was needed to build the buildpack other than knowledge of bash, and there was an existing one I could adapt as needed. I took the <a href="https://github.com/puffnfresh/haskell-buildpack-demo" target="_blank">demo app</a>, and tried to deploy it with no modifications...
+I say _almost_ because I had a brief stint of learning Haskell using the above publication. I had fun, but didn't have enough time to dedicate to learning it.
 
-{% codeblock %}
+So after a quick search, I found there was a Heroku buildpack for Haskell that already existed, which can be found [here](https://github.com/puffnfresh/heroku-buildpack-haskell). Awesome, this is exactly what I was hoping for. I had no context of what was needed to build the buildpack other than knowledge of bash, and there was an existing one I could adapt as needed. I took the [demo app](https://github.com/puffnfresh/haskell-buildpack-demo), and tried to deploy it with no modifications...
+
+```bash
 ➜ cf push hasktest --buildpack=git://github.com/puffnfresh/heroku-buildpack-haskell.git
 
 Creating route haskelltest.cfv2.dev... OK
@@ -53,14 +54,14 @@ Installing heroku-buildpack-haskell.git.
 	from /var/vcap/packages/dea_next/buildpacks/bin/run:10:in `<main>'
 Checking hasktest...
 Application failed to stage
-{% endcodeblock %}
+```
 
 Aaaaaand crash.
 
-Ok, so, it needs a little work. And I mean literally that, little work. I did the open-source coder's favorite thing and pressed the big ole' "Fork" button. You can find my fork <a href="https://github.com/BrianMMcClain/heroku-buildpack-haskell" target="_blank">here</a>. As you can see from the <a href="https://github.com/BrianMMcClain/heroku-buildpack-haskell/compare/22382e2ec9ccdf63cb802df96385d0743dcffbe0...a3cc2ca860a5586510fb509e32d61be30452e40c" target="_blank">commits</a>, hardly any work needed done to get things working, and sure enough...
+Ok, so, it needs a little work. And I mean literally that, little work. I did the open-source coder's favorite thing and pressed the big ole' "Fork" button. You can find my fork [here](https://github.com/BrianMMcClain/heroku-buildpack-haskell). As you can see from the [commits](https://github.com/BrianMMcClain/heroku-buildpack-haskell/compare/22382e2ec9ccdf63cb802df96385d0743dcffbe0...a3cc2ca860a5586510fb509e32d61be30452e40c"), hardly any work needed done to get things working, and sure enough...
 
 
-{% codeblock %}
+```bash
 ➜ cf push hasktest --buildpack=git://github.com/BrianMMcClain/heroku-buildpack-haskell.git
 
 Starting hasktest... OK
@@ -101,10 +102,10 @@ Checking hasktest...
   0/1 instances: 1 starting
   1/1 instances: 1 running
 OK
-{% endcodeblock %}
+```
 
 That's. It. 
 
-<center>{% img /images/cloudfoundry/hasktest.png %}</center>
+![](/images/cloudfoundry/hasktest.png)
 
-Cloud Foundry v2 is proving to refine the PaaS that I'm a huge fan of, and I can't wait to dig up other new features. <a href="https://twitter.com/andypiper" target="_blank">Andy Piper</a> wrote up a nice <a href="http://andypiper.co.uk/2013/05/16/cloud-foundry-has-gone-pivotal-so-whats-new/" target="_blank">blog post</a> today on the move from Cloud Foundry to Pivotal, as well Cloud Foundry v2 and BOSH. It's a good read, and I highly recommend you do.
+Cloud Foundry v2 is proving to refine the PaaS that I'm a huge fan of, and I can't wait to dig up other new features. [Andy Piper](https://twitter.com/andypiper) wrote up a nice [blog post](http://andypiper.co.uk/2013/05/16/cloud-foundry-has-gone-pivotal-so-whats-new/) today on the move from Cloud Foundry to Pivotal, as well Cloud Foundry v2 and BOSH. It's a good read, and I highly recommend you do.
