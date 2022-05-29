@@ -8,7 +8,7 @@ help:
 
 #preview: @ Start the Hugo server and update as changes are made
 preview:
-	hugo server
+	hugo server -D
 
 #build: @ Build the website to /ppublic
 build:
