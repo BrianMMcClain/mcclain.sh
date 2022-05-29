@@ -10,6 +10,8 @@ tags:
 - Buildpacks
 ---
 
+NOTE: The referenced tweet has since been deleted
+
 The above tweet summarizes a very productive and exciting lunch I had today, in which after getting CF v2 working last night thanks to [nise_bosh](https://github.com/nttlabs/nise_bosh), I started reading about buildpacks.
 
 To summarize buildpacks, taken straight from the [Cloud Foundry documentation](http://docs.cloudfoundry.com/docs/using/deploying-apps/custom/)...
