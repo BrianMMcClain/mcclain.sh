@@ -5,7 +5,7 @@ type: about
 firstname: Brian
 ---
 
-I'm a Senior Technologist at VMware working on the [Tanzu Developer Center](https://tanzu.vmware.com/developer/), both as a developer and as a [content creator](https://tanzu.vmware.com/developer/team/brian-mcclain/). I've always loved learning and experimenting with new technologies, and I love sharing what I learn with others even more.
+I'm a Staff Technologist at VMware working on the [Tanzu Developer Center](https://tanzu.vmware.com/developer/), both as a developer and as a [content creator](https://tanzu.vmware.com/developer/team/brian-mcclain/). I've always loved learning and experimenting with new technologies, and I love sharing what I learn with others even more.
 
 I joined VMware by way of acquisition, coming from Pivotal where I was a Principal Product Marketing Manager. I spent quite a bit of time time [talking about what Pivotal had to offer](https://tanzu.vmware.com/content/authors/brian-mcclain). Prior to Pivotal, I was a Software Engineer at Basho, working to squeeze every bit of performance we could out of [Riak](https://riak.com/), our flagship NoSQL database. 
 
