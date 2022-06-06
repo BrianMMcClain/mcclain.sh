@@ -1,9 +1,7 @@
 ---
-layout: post
 title: "Hacking on Cloud Foundry's Gorouter"
-date: 2014-05-12 22:39
-comments: true
-categories: 
+date: 2014-05-12
+tags: 
 - Cloud Foundry
 - gorouter
 - Go
@@ -33,7 +31,7 @@ We were observing that the sample app worked perfectly fine in Chrome, but not i
 
 Let's take a look at the headers from Chrome:
 
-```
+```bash
 200 OK
 Connection: keep-alive
 Upgrade:
@@ -45,7 +43,7 @@ Upgrade: websocket
 
 And the headers from Firefox
 
-```
+```bash
 200 OK
 Connection: keep-alive
 Upgrade:
@@ -57,13 +55,11 @@ Upgrade: websocket
 
 Notice the difference? As you can see, Firefox is providing a comma-separated list of values for the Connection header. According to [RFC 2616 section 4.2](http://tools.ietf.org/html/rfc2616#section-4.2), this is perfectly valid:
 
-<blockquote>
-Multiple message-header fields with the same field-name MAY be present in a message if and only if the entire field-value for that header field is defined as a comma-separated list [i.e., #(values)]. It MUST be possible to combine the multiple header fields into one "field-name: field-value" pair, without changing the semantics of the message, by appending each subsequent field-value to the first, each separated by a comma.
-</blockquote>
+>Multiple message-header fields with the same field-name MAY be present in a message if and only if the entire field-value for that header field is defined as a comma-separated list [i.e., #(values)]. It MUST be possible to combine the multiple header fields into one "field-name: field-value" pair, without changing the semantics of the message, by appending each subsequent field-value to the first, each separated by a comma.
 
 However after digging through the gorouter code, we see the following [method for handling the check if the header contains an upgrade request](https://github.com/cloudfoundry/gorouter/blob/74813aa9292d26fdd70f691dd7f501e7ea0a88d1/proxy/proxy.go#L301-L308):
 
-```
+```go
 func upgradeHeader(request *http.Request) string {
   // upgrade should be case insensitive per RFC6455 4.2.1
   if strings.ToLower(request.Header.Get("Connection")) == "upgrade" {
@@ -82,7 +78,7 @@ The Fix
 
 The last bit of lead-up until we hit on the true point of this post is the actual code fix. What we want to do is split the string on commas and compare each value, rather than the entire header itself. You can see the same code below in the PR I've made to the gorouter:
 
-```
+```go
 func upgradeHeader(request *http.Request) string {
   // upgrade should be case insensitive per RFC6455 4.2.1
   for _, val := range strings.Split(strings.ToLower(request.Header.Get("Connection")), ",") {
@@ -96,7 +92,7 @@ func upgradeHeader(request *http.Request) string {
 
 Criticize my Go skills all you like. This was written with about 20 minutes of Go knowledge. But, it got the job done. The requests from Firefox now were as follows:
 
-```
+```bash
 200 OK
 Connection: keep-alive
 Upgrade:
@@ -119,7 +115,7 @@ And so we reach the true point of this article, how do we test this? There's sev
 
 Let's go in order. You can find code used for testing [on my Github](https://github.com/BrianMMcClain/sinatra-websocket-sample). Not being a tutorial on running Sinatra apps, you can simply run:
 
-```
+```bash
 bundle install
 ruby app.rb
 ```
@@ -128,14 +124,14 @@ This will start our app available on 127.0.0.1:4567
 
 Next, we can reference the [Gorouter's README](https://github.com/cloudfoundry/gorouter/blob/master/README.md) on the other two steps. Again, not being a guide on Go, I'll assume your $GOPATH and $PATH environment variables are properly set. You can install and run NATS (or rather, gnats) with the following:
 
-```
+```bash
 go get github.com/apcera/gnatsd
 gnatsd
 ```
 
 And if all is on your side, you'll see the following:
 
-```
+```bash
 2014/05/12 22:47:46 ["Starting gnatsd version 0.5.2"]
 2014/05/12 22:47:46 ["Listening for client connections on 0.0.0.0:4222"]
 2014/05/12 22:47:46 ["gnatsd is ready"]
@@ -143,7 +139,7 @@ And if all is on your side, you'll see the following:
 
 Finally, the router itself:
 
-```
+```bash
 go get -v github.com/tools/godep
 go get -v github.com/cloudfoundry/gorouter
 
@@ -154,14 +150,14 @@ godep restore ./...
 
 This will pull the source of the gorouter to $GOPATH/src/github.com/cloudfoundry/gorouter. We'll make our changes here (in our example, it was the file at $GOPATH/src/github.com/cloudfoundry/gorouter/proxy/proxy.go), build it and run it:
 
-```
+```bash
 go build
 ./gorouter
 ```
 
 If gorouter connects to gnats, you'll see:
 
-```
+```bash
 {"timestamp":1399949677.137193441,"process_id":5194,"source":"router.global","log_level":"info","message":"Connected to NATS","data":null}
 {"timestamp":1399949677.140702009,"process_id":5194,"source":"common.logger","log_level":"info","message":"Component Router registered successfully","data":null}
 {"timestamp":1399949677.141372442,"process_id":5194,"source":"router.global","log_level":"info","message":"Waiting 5s before listening...","data":null}
@@ -171,19 +167,19 @@ If gorouter connects to gnats, you'll see:
 
 Finally, we need to tell gorouter about our app. As mentioned, gorouter listens on the NATS bus for publish messages, telling it where the apps are running. There's a few ways to do this, but I happened to have the ruby NATS tools installed, which you can install with:
 
-```
+```bash
 gem install nats
 ```
 
 And finally, publish a message on the NATS bus to tell gorouter about the app:
 
-```
+```bash
 nats-pub router.register "{\"host\": \"127.0.0.1\",\"port\": 4567,\"uris\": [\"localhost\"],\"tags\": {}, \"Dea\": \"dea\", \"App\": \"0\"}"
 ```
 
 To which you'll see the following in the gorouter logs:
 
-```
+```bash
 {"timestamp":1399950032.353356123,"process_id":5194,"source":"router.global","log_level":"debug","message":"router.register: Received message","data":{"message":{"host":"127.0.0.1","port":4567,"uris":["localhost"],"tags":{},"app":"0","private_instance_id":""}}}
 
 {"timestamp":1399950032.353794098,"process_id":5194,"source":"router.global","log_level":"debug","message":"Got router.register: \u0026{127.0.0.1 4567 [localhost] map[] 0 }","data":null}
@@ -191,7 +187,7 @@ To which you'll see the following in the gorouter logs:
 
 However, this can be thought of as a heartbeat. This needs to be sent at regular intervals. There's a project in the Cloud Foundry Incubator called [route-registrar](https://github.com/cloudfoundry-incubator/route-registrar) to handle this, but a quick and dirty shell script will do the job as well:
 
-```
+```bash
 #!/bin/bash
 
 while :

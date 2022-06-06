@@ -1,7 +1,6 @@
 ---
 title: "Buildpacks in Cloud Foundry v2"
 date: 2013-05-16
-comments: true
 tags: 
 - Cloud Foundry
 - PaaS

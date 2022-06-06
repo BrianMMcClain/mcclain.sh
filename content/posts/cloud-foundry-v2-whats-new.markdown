@@ -1,7 +1,6 @@
 ---
 title: "Cloud Foundry v2: What's New?"
 date: 2013-06-14
-comments: true
 tags: 
 - Cloud Foundry
 ---

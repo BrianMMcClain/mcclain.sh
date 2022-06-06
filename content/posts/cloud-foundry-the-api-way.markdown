@@ -1,7 +1,6 @@
 ---
 title: "Cloud Foundry the API Way"
 date: 2013-09-05
-comments: true
 tags: 
 - Cloud Foundry
 - API

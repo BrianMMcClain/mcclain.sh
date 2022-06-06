@@ -1,7 +1,6 @@
 ---
 title: "Introducing nise-bosh-vagrant"
 date: 2013-05-21
-comments: true
 tags: 
 - BOSH
 - nise-bosh
