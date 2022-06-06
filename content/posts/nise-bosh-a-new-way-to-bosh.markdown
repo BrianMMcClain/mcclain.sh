@@ -1,5 +1,4 @@
 ---
-layout: post
 title: "nise-bosh - A New Way To BOSH"
 date: 2013-05-20
 comments: true
