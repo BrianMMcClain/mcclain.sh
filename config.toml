@@ -26,6 +26,7 @@ theme = "LoveIt"
 [params]
     defaultTheme = "dark"
     title = "mcclain.sh"
+     images = ['/images/site-default.png']
     description = "Welcome to mcclain.sh"
     [params.header]
         [params.header.title]
