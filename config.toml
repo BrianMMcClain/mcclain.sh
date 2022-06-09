@@ -1,4 +1,4 @@
-baseURL = 'http://example.org/'
+baseURL = 'https://mcclain.sh/'
 languageCode = 'en-us'
 languageName = "English"
 title = 'mcclain.sh'
@@ -56,7 +56,6 @@ theme = "LoveIt"
         identifier = "brian"
         name = "About Me"
         url = "/brian/"
-        # title will be shown when you hover on this menu link
         title = ""
     [[menu.main]]
         weight = 2
