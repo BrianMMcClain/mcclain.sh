@@ -143,6 +143,6 @@ Much more readable! We can see some interesting information right off of the bat
 
 That's more or less it. There are some other [Twitch-specific IRC messages](https://dev.twitch.tv/docs/irc#supported-irc-messages) to look into if you decide to create a full-fledge chat client, but the above will get you up and running at least! If you're interested in some more ramblings on creating Twitch chat bots, check out the episode of Tanzu Tuesdays that I was one where I walk through all of this in the context of Spring Boot and Project Reactor, it was a ton of fun!
 
-You can also see all of this in a fun little side project I've been working on to [implement this in Go](https://github.com/BrianMMcClain/twitch-buddy-go) to build a Twitch chat client. I apologize in advance for the code :)
+You can also see all of this in a fun little side project I've been working on to [implement this in Go](https://github.com/BrianMMcClain/twitchgo) to build a Twitch chat client. I apologize in advance for the code :)
 
 {{< youtube jfIIOacAI50 >}}
