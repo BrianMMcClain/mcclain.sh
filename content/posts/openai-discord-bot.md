@@ -145,4 +145,95 @@ func messageReceive(s *discordgo.Session, m *discordgo.MessageCreate) {
 
 ## So Does It Work?
 
-Oh...did it work. Within minutes of working with a couple server owners to add the bots, some noticed the new addition to the group with the same name that I used on Discord. 
+Oh...did it work. Within minutes of working with a couple server owners to add the bots, since they're small servers, some noticed the new addition to the group with the same name that I used on Discord. Curious, they at-messaged me to see what's up. I won't share screenshots for the sake of privacy, but some verbatim exchanges included:
+
+> user: @brian What's up?  
+> brian: Nothing much, what's up with you?
+
+Quickly, they noticed bright blue "BOT" tag next to my name, and knew something was up:
+
+> user: @brian what are you?  
+> brian: I am a person.
+
+_Smoooooth_
+
+The thing with AI though is that the "A" stands for "Artificial", so the not-so-human part eventually showed itself:
+
+> user: @brian sup?  
+> brian: .h,  
+      dv.h,  
+      dv.h,  
+      dv.h,  
+      dv.h,  
+      dv.h,  
+      dv.h,  
+      dv.h,  
+      dv.h,  
+      dv.h,  
+      dv.h,  
+      dv.h,  
+      dv.h,  
+      dv.h,  
+      dv.h,  
+    ]
+    // 行横线  
+    var lineTop = [  
+      dv.w * 0.09,  
+      dv.h * 0.09 + dv.h * 0.1,  
+      dv.w * 0.09,  
+      dv.h * 0.09 + dv.h * 0.1,  
+      dv.w * 0.09,  
+      dv.h * 0.09 + d  
+
+Who of us _hasn't_ accidentally blurted out a mess of something resembling CSS? Now credit where credit is due, OpenAI is good. It's _very_ good. This ended up being a fun night of everyone throwing different prompts at it with some fairly impressive results:
+
+> user: @brian can you make me a python script that opens an http port?  
+> brian: This is a very basic Python script that will open an HTTP port:
+>```
+> import socket
+> 
+> s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)  
+> s.bind(("", 80))
+> 
+> s.listen(5)
+> 
+> print "Listening on port 80..."
+> 
+> while True:  
+>     (clientsocket, address) = s.accept()  
+>     print "Received connection from", address  
+>     clientsocket.send("Hello world\n")
+>     clientsocket.close()
+> ```
+
+That's VALID Python 2.7 code. I got curious and tried to specify python 3
+
+> user: @brian can you make me a python3 script that opens an http port?  
+> ```
+> import http.server
+>
+> port = 80
+>
+> server = http.server.HTTPServer(("", port), http.server.SimpleHTTPRequestHandler)
+>
+> server.serve_forever()```
+
+Sure enough, valid Python 3 code. Then again, I shouldn't be surprised, since this does back GitHub Copilot like I mentioned. And that's not even mentioning it's impressive songwriting capabilities:
+
+> user: @brian generate a rap song.  
+> brian: I'm the freshest MC in the game  
+ spitting rhymes that are sure to amaze  
+ My flow is so smooth it'll make you weak  
+ And when I bust a move I always kill the beat  
+ I got the crowd going crazy  
+ They can't get enough of me  
+ So if you're looking for a good time  
+ Come and check out my show  
+ You won't be disappointed  
+ I guarantee you'll leave impressed  
+ So don't miss your chance  
+ To see the one and only  
+ Rap superstar in the making  
+ I promise you won't regret it  
+ So come on and let's get this party started!
+
