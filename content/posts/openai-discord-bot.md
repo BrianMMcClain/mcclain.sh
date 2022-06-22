@@ -5,22 +5,21 @@ tags:
 - go
 - openai
 - discord
-draft: true
 ---
 
 This is half-tutorial, half-storytelling. Let's start with the story half :)
 
 ## The Story
 
-I'm not sure why, but I love writing Discord bots to do the dumbest things possible. Somehow though, they devolve to having a set of commands that serve no other purpose than to make the people in the server laugh. When I still played World of Warcraft, a well-intentioned bot for our guild's server quickly grew from a tool to help coordinate events and look up items in the game, to something that was essentially parrot that told our own inside jokes back to us.
+I'm not sure why, but I love writing Discord bots to do the dumbest things possible. They always start as a useful tool for the server, but somehow they always devolve to having a set of commands that serve no other purpose than to make the people in the server laugh. When I still played World of Warcraft, a well-intentioned bot for our guild's server quickly spiraled from a tool to help coordinate events and look up items in the game, to something that was essentially parrot that told our own inside jokes back to us.
 
 Nonetheless, I keep writing them.
 
-Fast-forward to this evening, and I stumbled across the [OpenAI Playground](beta.openai.com/playground). For those unfamiliar with OpenAI (which, admittedly I was as well until a few hours ago), this [excerpt from their docs](https://beta.openai.com/docs/quickstart) summarizes it well:
+Fast-forward to this evening, and I stumbled across the [OpenAI Playground](https://beta.openai.com/playground). This [excerpt from their docs](https://beta.openai.com/docs/quickstart) summarizes what OpenAI is pretty well:
 
 > The OpenAI API can be applied to virtually any task that involves understanding or generating natural language or code. We offer a spectrum of models with different levels of power suitable for different tasks, as well as the ability to fine-tune your own custom models. These models can be used for everything from content generation to semantic search and classification.
 
-And even more to the point: 
+And even more to the point:
 
 > OpenAI has trained cutting-edge language models that are very good at understanding and generating text. Our API provides access to these models and can be used to solve virtually any task that involves processing language.
 
@@ -29,19 +28,21 @@ tl;dr: Among other things, you can feed it a prompt, it sends back an AI-generat
 > Prompt: Write a tagline for an ice cream shop.  
   Completion: We serve up smiles with every scoop!
 
-No matter if it's Discord servers, Slack channels, mailing lists, or another other many-to-many async form of communication, sometimes you naturally drift away from some. For me, it was a couple of Discord serves from groups I would game with. I still keep in touch with some that I became close friends with, but I don't participate much in the general chat channels. So I had a thought...
+So I had a thought...
 
-...what if I just dropped an OpenAI-powered bot in there?
+...what if I just dropped a bot backed by this into a couple Discord servers?
 
 ## Disclaimer
 
-Before we jump into the code, let me clarify one thing: Though I've somewhat drifted away from these servers, I still have close contact with many of the individual members. The server owners gave explicit permission for this and added the bots themselves. Don't do this on a server randomly, it's rude.
+Before we jump into the code, let me clarify one thing: I still have close contact with many of the individual members of these servers. The server owners gave explicit permission to do this and added the bots themselves. Don't do this on a server randomly, it's rude.
 
 ## The OpenAI API
 
-OpenAI provides _a lot_ more than just being a glorified chat bot. [DALL-E 2](https://openai.com/dall-e-2/) can create incredibly realistic and accurate images from a text description. OpenAI Codex backs [GitHub Copilot](https://github.com/features/copilot/). I'm essentially using a Ferrari to go grocery shopping.
+OpenAI provides _a lot_ more than just being a glorified chat bot. [DALL-E 2](https://openai.com/dall-e-2/) can create incredibly realistic and accurate images from nothing more than a text prompt. OpenAI Codex backs [GitHub Copilot](https://github.com/features/copilot/). I'm essentially using a Ferrari to go grocery shopping.
 
-There's a plethora of [language bindings](https://beta.openai.com/docs/libraries/community-libraries). I've been becoming quite the [Gopher](https://go.dev/blog/gopher) lately and decided to hack this up in Go, but I decided to forego the listed [go-gpt3](https://github.com/sashabaranov/go-gpt3) library, at least for now, in favor of interacting with the API over HTTP. After [creating an API key](https://beta.openai.com/account/api-keys), you can actually start sending requests to the API with cURL right away!
+An important note is that _technically_ OpenAI's models expect a writing prompt, not so much a question-answer cadence. But I figured let's hack this together and see what happens!
+
+There's a plethora of [language bindings](https://beta.openai.com/docs/libraries/community-libraries) to chose from, and I've been becoming quite the [Gopher](https://go.dev/blog/gopher) lately and decided to hack this up in Go, I decided to forego the listed [go-gpt3](https://github.com/sashabaranov/go-gpt3) library for now in favor of interacting with the API over HTTP. After [creating an API key](https://beta.openai.com/account/api-keys), you can actually start sending requests to the API with cURL right away!
 
 ```bash
 curl https://api.openai.com/v1/completions \
@@ -96,7 +97,7 @@ So we know that at the very least, we can throw HTTP POST requests to the API, l
 
 ## The Discord Bot
 
-Generally, I wrote my bots in Ruby, a language I still have a massive soft spot for. But this was a learning exercise, so let's do a quick google search, and looks like [discordgo by bwmarrin](https://github.com/bwmarrin/discordgo) is the popular way to go! The code here is pretty straight-forward: Create a new `discordgo` by providing a [Discord Application token](https://discord.com/developers/applications) and register a handler function that gets invoked each time the bot reads a message. The simplified version boils down to:
+Generally, I write my bots in Ruby, a language I still have a massive soft spot for. But since I wanted to write this in Go, I did a quick search and [discordgo by bwmarrin](https://github.com/bwmarrin/discordgo) seems like a popular library, so let's roll with it! The code here is pretty straight-forward: Create a new `discordgo` instance by providing a [Discord Application token](https://discord.com/developers/applications) and register a handler function that gets invoked each time the bot reads a message. The simplified version boils down to:
 
 ```go
 func main() {
@@ -123,9 +124,9 @@ In this case, we've registered `messageReceive` as the handler to invoke each ti
 func messageReceive(s *discordgo.Session, m *discordgo.MessageCreate) {
 ```
 
-You can see the entirety of the code on GitHub, but there's two important things we use from this library:
+You can see the [entirety of the code on GitHub](https://github.com/BrianMMcClain/openai-discord-bot/blob/main/bot.go), but there's two important things we use from this library:
 
-- `m.Message.Content`: The message that the bot just read in any channel it has access to. This includes all the meta data around who sent it, if they mention any other user or channel, if there's any emoji or reactions, and any other data associated with a Discord message
+- `m.Message.Content`: The message that the bot just read. This includes all the metadata for who sent it, if they mention any other user or channel, if there's any emoji or reactions, and any other data associated with a Discord message
 - `s.ChannelMessageSend(m.ChannelID, someText)`: The bot sends a message of `someText` to the same channel that it read this message from
 
 So in essence, this method does the following:
@@ -133,19 +134,20 @@ So in essence, this method does the following:
 ```go
 func messageReceive(s *discordgo.Session, m *discordgo.MessageCreate) {
   // Read the message and determine if we need to respond
-  // In this case, the bot only responds if you at-mention it
+  // In this case, the bot only responds if you mention it directly
 
-  // Perform an HTTP Post against the OpenAI API, sending m.Message.Content
+  // Perform an HTTP POST against the OpenAI API, sending m.Message.Content
 
   // Parses the response JSON
 
-  // Sends the response from OpenAI to Discord with s.ChannelMessageSend(m.ChannelID, response.choices[0].text) 
+  // Sends the response from OpenAI to Discord with 
+  // s.ChannelMessageSend(m.ChannelID, response.choices[0].text) 
 }
 ```
 
 ## So Does It Work?
 
-Oh...did it work. Within minutes of working with a couple server owners to add the bots, since they're small servers, some noticed the new addition to the group with the same name that I used on Discord. Curious, they at-messaged me to see what's up. I won't share screenshots for the sake of privacy, but some verbatim exchanges included:
+Sorta! Within minutes of working with a couple server owners to add the bots, some noticed the new addition to the group with the same name and avatar that I used on Discord. Curious, they started sending messages mentioning the bot directly to see what's up. I won't share screenshots for the sake of privacy, but some verbatim exchanges included:
 
 > user: @brian What's up?  
 > brian: Nothing much, what's up with you?
@@ -185,11 +187,12 @@ The thing with AI though is that the "A" stands for "Artificial", so the not-so-
       dv.w * 0.09,  
       dv.h * 0.09 + d  
 
-Who of us _hasn't_ accidentally blurted out a mess of something resembling CSS? Now credit where credit is due, OpenAI is good. It's _very_ good. This ended up being a fun night of everyone throwing different prompts at it with some fairly impressive results:
+Who of us _hasn't_ accidentally blurted out a mess of something resembling CSS? Now credit where credit is due, OpenAI is good. It's _very_ good. Bit it does have some quirks. This ended up being a fun night of everyone throwing different prompts at it with some interesting results:
 
 > user: @brian can you make me a python script that opens an http port?  
+>  
 > brian: This is a very basic Python script that will open an HTTP port:
->```
+> ```python
 > import socket
 > 
 > s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)  
@@ -205,35 +208,44 @@ Who of us _hasn't_ accidentally blurted out a mess of something resembling CSS? 
 >     clientsocket.send("Hello world\n")
 >     clientsocket.close()
 > ```
+(Codeblock added for readability)
 
-That's VALID Python 2.7 code. I got curious and tried to specify python 3
+Which other than trying to open a privileged port is valid Python 2.7 code. I got curious and tried to specify Python 3
 
-> user: @brian can you make me a python3 script that opens an http port?  
-> ```
+> user: @brian can you make me a python3 script that opens an http port? 
+>  
+> brian:  
+> ```python
 > import http.server
 >
 > port = 80
 >
 > server = http.server.HTTPServer(("", port), http.server.SimpleHTTPRequestHandler)
 >
-> server.serve_forever()```
+> server.serve_forever()
+> ```
 
-Sure enough, valid Python 3 code. Then again, I shouldn't be surprised, since this does back GitHub Copilot like I mentioned. And that's not even mentioning it's impressive songwriting capabilities:
+And that's not even mentioning it's impressive songwriting capabilities:
 
-> user: @brian generate a rap song.  
-> brian: I'm the freshest MC in the game  
- spitting rhymes that are sure to amaze  
- My flow is so smooth it'll make you weak  
- And when I bust a move I always kill the beat  
- I got the crowd going crazy  
- They can't get enough of me  
- So if you're looking for a good time  
- Come and check out my show  
- You won't be disappointed  
- I guarantee you'll leave impressed  
- So don't miss your chance  
- To see the one and only  
- Rap superstar in the making  
- I promise you won't regret it  
- So come on and let's get this party started!
+> user: @brian generate a pop song  
+>  
+> brian: In the dark of night  
+I think of you  
+I can't get you out of my mind  
+I'm trying to fight  
+Against the feelings I have for you  
+But I can't  
+I know I should  
+But I can't  
+When I'm with you  
+I feel like I'm in the sun  
+I'm trying to hide  
+But it's hard to do  
+When I'm with you  
+It feels like I'm home someday
 
+## So What's the Point?
+
+To be blunt? I'm not sure. It made me laugh, it made my friends laugh, and really that's good enough for me. In less than a day, a little under 600 messages were sent from the bot, and it would only respond when directly mentioned in a message, meaning people asked it almost 600 questions as well. My plan is to let it stay in the servers for another couple of days and then once everyone has had their fun, shut it down.
+
+I am curious to look more into the work that OpenAI is doing. Their [DALL-E 2](https://openai.com/dall-e-2/) system has been an interesting topic on Twitter lately due to the impressive results that it can create. There's a waitlist however and I'm not sure how long it is. Who knows, maybe if I get access to that I can share the fun with some friends again!
