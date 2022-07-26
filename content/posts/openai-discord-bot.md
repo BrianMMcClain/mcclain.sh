@@ -5,6 +5,7 @@ tags:
 - go
 - openai
 - discord
+draft: true
 ---
 
 This is half-tutorial, half-storytelling. Let's start with the story half :)
