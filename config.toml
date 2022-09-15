@@ -45,6 +45,8 @@ theme = "LoveIt"
             Line = false
             Weibo = false
             Linkedin = true
+        [params.page.code]
+            maxShownLines = 80
     [params.analytics]
         enable = true
         [params.analytics.google]
