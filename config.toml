@@ -22,6 +22,9 @@ theme = "LoveIt"
     [params.social.LinkedIn]
         id = "brian-mcclain"
         weight = 4
+    [params.social.Mastodon]
+        id = "@bmcclain"
+        prefix = "https://mastodon.social"
 
 [params]
     defaultTheme = "dark"
