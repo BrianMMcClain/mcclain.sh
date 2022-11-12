@@ -24,7 +24,7 @@ theme = "LoveIt"
         weight = 4
     [params.social.Mastodon]
         id = "@bmcclain"
-        prefix = "https://mastodon.social"
+        prefix = "https://hachyderm.io"
 
 [params]
     defaultTheme = "dark"
