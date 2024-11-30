@@ -7,9 +7,7 @@ description: I got access to Google's "secret" recruitment program, but is it wo
 summary: Wake up, Neo . . . The Matrix has you . . . Follow the white rabbit.
 ---
 
-{{< admonition type=info title="NOTE" open=true >}}
-I wrote this blog post near the beginning of the year. At the time, I had no intention of changing jobs, but I felt that it’d be a bit awkward to post about a recruiting tool. I chose to publish this the weekend before I start my new job to make it completely clear: this was just a fun coding exercise for me. Nothing more 🙂
-{{< /admonition >}}
+> I wrote this blog post near the beginning of the year. At the time, I had no intention of changing jobs, but I felt that it’d be a bit awkward to post about a recruiting tool. I chose to publish this the weekend before I start my new job to make it completely clear: this was just a fun coding exercise for me. Nothing more 🙂
 
 You know that scene near the beginning of The Matrix where Neo is asleep at his keyboard, his monitor somehow projecting directly onto his face, when suddenly it blinks to an empty screen? Slowly, the words are typed out:
 

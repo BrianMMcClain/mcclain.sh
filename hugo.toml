@@ -9,6 +9,7 @@ theme = "LoveIt"
   email = ""
   link = "/brian"
 
+
 [params.social]
     [params.social.Twitter]
         id = "BrianMMcClain"
@@ -29,13 +30,15 @@ theme = "LoveIt"
 [params]
     defaultTheme = "dark"
     title = "mcclain.sh"
-     images = ['/images/site-default.png']
+    images = ['/images/site-default.png']
     description = "Welcome to mcclain.sh"
     [params.header]
         [params.header.title]
             name = "mcclain.sh"
     [params.app]
         title = "mcclain.sh"
+    [params.author]
+        name = "Brian McClain"
     [params.home]
         [params.home.profile]
             enable = true
