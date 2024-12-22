@@ -11,9 +11,6 @@ theme = "LoveIt"
 
 
 [params.social]
-    [params.social.Twitter]
-        id = "BrianMMcClain"
-        weight = 1
     [params.social.GitHub]
         id = "BrianMMcClain"
         weight = 2
@@ -23,9 +20,6 @@ theme = "LoveIt"
     [params.social.LinkedIn]
         id = "brian-mcclain"
         weight = 4
-    [params.social.Mastodon]
-        id = "@bmcclain"
-        prefix = "https://hachyderm.io"
 
 [params]
     defaultTheme = "dark"
