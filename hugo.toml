@@ -4,6 +4,8 @@ languageName = "English"
 title = 'mcclain.sh'
 theme = "LoveIt"
 
+googleAnalytics = "G-HTSZVK4LBF"
+
 [author]
   name = "Brian McClain"
   email = ""
@@ -50,7 +52,7 @@ theme = "LoveIt"
     [params.analytics]
         enable = true
         [params.analytics.google]
-            id = "UA-131000305-1"
+            id = "G-HTSZVK4LBF"
 
 
 [menu]
