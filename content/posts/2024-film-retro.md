@@ -36,6 +36,49 @@ I thought it was interesting that, on average, I rated the films I watched over 
 1. A lot of films I watched this year were explicit recommendations from sources I trust, which means they tend to be films that are generally well-received and in line with my interests.
 2. I just really like watching movies. It puts me in a good mood and helps me relax. 
 
+### Rating distribution
+
+Below is the distribution of how I rated all of the films I watched in 2024.
+
+{{< chart id="allRatings" title="Rating distribution of all watched films" width="100" >}}
+
+{
+ type: 'bar',
+ data: {
+    labels: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
+    datasets: [{
+        label: '# of Films',
+        data: [1,0,0,2,4,8,24,49,64,23,0],
+        borderWidth: 1
+    }]
+ },
+ options: {
+    scales: {
+        y: {
+            beginAtZero: true
+        }
+    }
+ }
+};
+
+{{</ chart >}}
+
+|Rating|Count|
+|------|-----|
+|0|1|
+|1|0|
+|2|0|
+|3|2|
+|4|4|
+|5|8|
+|6|24|
+|7|49|
+|8|64|
+|9|23|
+|10|0|
+
+One correction in this data is that a film marked as "watched" but not rated on Letterboxd shows as a "0" rating. The film in question, [New York Ninja (2021)](https://www.imdb.com/title/tt15358226/) is actually a very unique movie. It was filmed in 1984, but the distribution company went bankrupt before post-production. Years later, the raw film was rediscovered without audio or a script. [Vinegar Syndrome](https://vinegarsyndrome.com/) acquired this footage, edited it, dubbed the audio, and eventually released the film in 2021. It's hard to rate this film in the context of everything else I watched in 2024, so I decided not to include one.
+
 ### Films by genre
 
 Below is a breakdown of films by genre. Films in [TMDB's](https://www.themoviedb.org/) database can have multiple tags, so the total count here doesn't match the total number of films I watched. 
@@ -247,6 +290,49 @@ There's some missing here that I haven't had a chance to catch before the end of
 - [Rebel Ridge](https://www.imdb.com/title/tt11301886/)
 - [Red Rooms](https://www.imdb.com/title/tt22207786/)
 - [Sing Sing](https://www.imdb.com/title/tt28479262/)
+
+### 2024 rating distribution
+
+Below is the distribution of how I rated the films released in 2024 that I watched.
+
+{{< chart id="thisYearRating" title="2024 Rating Distribution" width="100" >}}
+
+{
+ type: 'bar',
+ data: {
+    labels: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
+    datasets: [{
+        label: '# of Films',
+        data: [0,0,0,0,2,6,7,4,6,0,0],
+        borderWidth: 1
+    }]
+ },
+ options: {
+    scales: {
+        y: {
+            beginAtZero: true
+        }
+    }
+ }
+};
+
+{{</ chart >}}
+
+|Rating|Count|
+|------|-----|
+|0|0|
+|1|0|
+|2|0|
+|3|0|
+|4|2|
+|5|6|
+|6|7|
+|7|4|
+|8|6|
+|9|0|
+|10|0|
+
+Overall, I enjoyed most of the 2024 films I watched. I thought a good handful were great, but none of them really crossed over into "amazing" territory for me. 
 
 ### 2024 highlights 
 
