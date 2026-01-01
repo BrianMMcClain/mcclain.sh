@@ -1,6 +1,6 @@
 ---
 title: "My 2025 Film Retrospective"
-date: 2025-10-31T10:24:29-05:00
+date: 2026-01-01T00:00:00-05:00
 description: A reflection on the films that I watched in 2025.
 draft: true
 ---
@@ -95,7 +95,7 @@ Below is the distribution of how I rated all of the films I watched in 2025.
 
 As weird as it is to say, I took more "chances" this year when it came to film. Time is a valuable thing, and it's tough to convince myself to watch something that I'm not absolutely jazzed about. But this year I decided to give more films an honest shot. This resulted in more fours and fives, but there were a few special films I found in there too.
 
-### Filmes by genre 
+### Films by genre 
 
 Below is a breakdown of films by genre. Films in TMDB’s database can have multiple tags, so the total count here doesn’t match the total number of films I watched.
 
@@ -230,6 +230,8 @@ If you're curious about the film that has no languange, that would be [Electroma
 |[2000](https://letterboxd.com/brianmmcclain/diary/films/for/2025/decade/2000s/)|19|13.87%|
 |[2010](https://letterboxd.com/brianmmcclain/diary/films/for/2025/decade/2010s/)|7|5.11%|
 |[2020](https://letterboxd.com/brianmmcclain/diary/films/for/2025/decade/2020s/)|65|47.45%|
+
+### Highest rated films
 
 ## 2025 films
 
