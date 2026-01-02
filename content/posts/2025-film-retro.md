@@ -2,7 +2,6 @@
 title: "My 2025 Film Retrospective"
 date: 2026-01-01T00:00:00-05:00
 description: A reflection on the films that I watched in 2025.
-draft: true
 ---
 
 Welcome to the new year!. It's that time again where I look back on all the films I watched in 2025, reflect, and look towards 2026.
