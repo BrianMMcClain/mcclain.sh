@@ -232,6 +232,14 @@ Below is a breakdown of films by the decade they released.
 |[2010](https://letterboxd.com/brianmmcclain/diary/films/for/2025/decade/2010s/)|7|5.11%|
 |[2020](https://letterboxd.com/brianmmcclain/diary/films/for/2025/decade/2020s/)|65|47.45%|
 
+I technically accomplished my goal of watching more films from the 60's and earlier, but just barely. Last year I watched 20 films released prior to 1970, this year I watched 23. On the other hand, by percentage that means 16.8% of films I watched this year fell into that category, compared to 11.4% last year. That said, some of my favorites I watched in 2025 fit in these 23 films:
+
+- [The Apartment (1960)](https://letterboxd.com/film/the-apartment/)
+- [Harakiki (1962)](https://letterboxd.com/film/harakiri/)
+- [Gilda (1946)](https://letterboxd.com/film/gilda/)
+- [Brief Encounter (1945)](https://letterboxd.com/film/brief-encounter/)
+- [Double Indemnity (1944)](https://letterboxd.com/film/double-indemnity/)
+
 ### Films by country
 
 Below is a breakdown of films countries of production.
